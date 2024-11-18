@@ -11,8 +11,9 @@ find_package(SFML 2.5 COMPONENTS system window graphics REQUIRED)
 
 # Ajoutez votre exécutable
 add_executable(Jeu main.cpp
-        test.h
-        test.cpp)
+        Player.cpp
+        Player.h
+)
 
 # Liez SFML à votre projet
 target_link_libraries(Jeu sfml-main)
