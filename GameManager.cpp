@@ -26,11 +26,6 @@ void GameManager::update(float deltaTime) {
         Wave& currentWave = waves[currentWaveIndex];
         currentWave.update(deltaTime, player);
     }
-    for (const Entity& enemy : waves[currentWaveIndex].getEnemies()) { // Implémentez une méthode getEnemies() dans Wave si nécessaire
-        if (enemy.checkCollision(player)) {
-            std::cout << "Player collided with an enemy!" << std::endl;
-        }
-    }
 }
 
 // Dessiner l'arène, le joueur et la vague actuelle.

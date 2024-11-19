@@ -60,3 +60,12 @@ void Entity::setColliding(bool colliding) {
     isColliding = colliding;
 }
 
+void Entity::applyForce(sf::Vector2f force) {
+    velocity += force;
+}
+
+
+bool Entity::getColliding() const {
+    return isColliding;
+}
+
