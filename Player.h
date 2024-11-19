@@ -1,22 +1,13 @@
-//
-// Created by zachf on 16/11/2024.
-//
+#ifndef PLAYER_HPP
+#define PLAYER_HPP
 
-#ifndef PLAYER_H
-#define PLAYER_H
+#include "Entity.h"
 
-class Player {
-private:
-    double health = 0;
-    double maxHealth = 0;
-    double attack = 0;
-    double defense = 0;
-    double speed = 0;
+class Player : public Entity {
+    public:
+    Player();
+    Player(std::string texturePath, double health, double attack, double defense, int speed, float sizeX, float sizeY) : Entity(texturePath, health, attack, defense, speed, sizeX, sizeY) {};
+    void update(float deltaTime, Player player) override;
 
-public:
-    //TODO : methode for player
 };
-
-
-
-#endif //PLAYER_H
+#endif

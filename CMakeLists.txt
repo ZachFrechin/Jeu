@@ -11,8 +11,18 @@ find_package(SFML 2.5 COMPONENTS system window graphics REQUIRED)
 
 # Ajoutez votre exécutable
 add_executable(Jeu main.cpp
+        GameManager.cpp
+        GameManager.h
+        Viewer.cpp
+        Viewer.h
+        Entity.cpp
+        Entity.h
         Player.cpp
         Player.h
+        Enemy.cpp
+        Enemy.h
+        Wave.cpp
+        Wave.h
 )
 
 # Liez SFML à votre projet
