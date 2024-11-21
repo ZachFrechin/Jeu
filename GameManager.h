@@ -3,25 +3,37 @@
 
 #include <SFML/Graphics.hpp>
 #include <vector>
+
+#include "Collision.h"
 #include "Entity.h"
 #include "Player.h"
 #include "Wave.h"
+#include "WaveFactory.h"
 
 class GameManager {
 public:
-    GameManager(sf::RenderWindow& window, std::string texturePath);
+    GameManager(sf::RenderWindow& window, const std::string &texturePath);
 
-    void update(float deltaTime);
-    void draw();
+    void update(float deltaTime, float time);
+    void draw() const;
+
+    int getCurrentWaveIndex() const;
+    const Player& getPlayer() const;
+
+    void addInGameItem(std::vector<std::unique_ptr<Item>> items);
 
 private:
     sf::RenderWindow& window;
     sf::Texture arena;
-    sf::Sprite sprite; // Représente l'arène.
+    sf::Sprite sprite;
 
-    Player player;
-    std::vector<Wave> waves;
-    int currentWaveIndex = 0; // Index de la vague actuelle.
+    std::unique_ptr<Player> player;
+    std::unique_ptr<Collision> collisionManager;
+    std::vector<std::unique_ptr<Wave>> waves;
+    std::unique_ptr<WaveFactory> waveFactory;
+    std::vector<std::unique_ptr<Item>> inGameItems;
+
+    int currentWaveIndex = 0;
 };
 
-#endif // GAMEMANAGER_H
+#endif

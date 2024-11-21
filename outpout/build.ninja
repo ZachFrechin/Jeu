@@ -98,6 +98,41 @@ build CMakeFiles/Jeu.dir/Wave.cpp.obj: CXX_COMPILER__Jeu_unscanned_Debug C$:/Use
   OBJECT_DIR = CMakeFiles\Jeu.dir
   OBJECT_FILE_DIR = CMakeFiles\Jeu.dir
 
+build CMakeFiles/Jeu.dir/Shot.cpp.obj: CXX_COMPILER__Jeu_unscanned_Debug C$:/Users/zachf/CLionProjects/Jeu/Shot.cpp || cmake_object_order_depends_target_Jeu
+  DEP_FILE = CMakeFiles\Jeu.dir\Shot.cpp.obj.d
+  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
+  INCLUDES = -isystem C:/Users/zachf/Documents/SFML-2.6.2/include
+  OBJECT_DIR = CMakeFiles\Jeu.dir
+  OBJECT_FILE_DIR = CMakeFiles\Jeu.dir
+
+build CMakeFiles/Jeu.dir/Collision.cpp.obj: CXX_COMPILER__Jeu_unscanned_Debug C$:/Users/zachf/CLionProjects/Jeu/Collision.cpp || cmake_object_order_depends_target_Jeu
+  DEP_FILE = CMakeFiles\Jeu.dir\Collision.cpp.obj.d
+  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
+  INCLUDES = -isystem C:/Users/zachf/Documents/SFML-2.6.2/include
+  OBJECT_DIR = CMakeFiles\Jeu.dir
+  OBJECT_FILE_DIR = CMakeFiles\Jeu.dir
+
+build CMakeFiles/Jeu.dir/WaveFactory.cpp.obj: CXX_COMPILER__Jeu_unscanned_Debug C$:/Users/zachf/CLionProjects/Jeu/WaveFactory.cpp || cmake_object_order_depends_target_Jeu
+  DEP_FILE = CMakeFiles\Jeu.dir\WaveFactory.cpp.obj.d
+  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
+  INCLUDES = -isystem C:/Users/zachf/Documents/SFML-2.6.2/include
+  OBJECT_DIR = CMakeFiles\Jeu.dir
+  OBJECT_FILE_DIR = CMakeFiles\Jeu.dir
+
+build CMakeFiles/Jeu.dir/Item.cpp.obj: CXX_COMPILER__Jeu_unscanned_Debug C$:/Users/zachf/CLionProjects/Jeu/Item.cpp || cmake_object_order_depends_target_Jeu
+  DEP_FILE = CMakeFiles\Jeu.dir\Item.cpp.obj.d
+  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
+  INCLUDES = -isystem C:/Users/zachf/Documents/SFML-2.6.2/include
+  OBJECT_DIR = CMakeFiles\Jeu.dir
+  OBJECT_FILE_DIR = CMakeFiles\Jeu.dir
+
+build CMakeFiles/Jeu.dir/Bonus.cpp.obj: CXX_COMPILER__Jeu_unscanned_Debug C$:/Users/zachf/CLionProjects/Jeu/Bonus.cpp || cmake_object_order_depends_target_Jeu
+  DEP_FILE = CMakeFiles\Jeu.dir\Bonus.cpp.obj.d
+  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
+  INCLUDES = -isystem C:/Users/zachf/Documents/SFML-2.6.2/include
+  OBJECT_DIR = CMakeFiles\Jeu.dir
+  OBJECT_FILE_DIR = CMakeFiles\Jeu.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target Jeu
@@ -106,7 +141,7 @@ build CMakeFiles/Jeu.dir/Wave.cpp.obj: CXX_COMPILER__Jeu_unscanned_Debug C$:/Use
 #############################################
 # Link the executable Jeu.exe
 
-build Jeu.exe: CXX_EXECUTABLE_LINKER__Jeu_Debug CMakeFiles/Jeu.dir/main.cpp.obj CMakeFiles/Jeu.dir/GameManager.cpp.obj CMakeFiles/Jeu.dir/Viewer.cpp.obj CMakeFiles/Jeu.dir/Entity.cpp.obj CMakeFiles/Jeu.dir/Player.cpp.obj CMakeFiles/Jeu.dir/Enemy.cpp.obj CMakeFiles/Jeu.dir/Wave.cpp.obj | C$:/Users/zachf/Documents/SFML-2.6.2/lib/libsfml-main-d.a C$:/Users/zachf/Documents/SFML-2.6.2/lib/libsfml-graphics-d.a C$:/Users/zachf/Documents/SFML-2.6.2/lib/libsfml-window-d.a C$:/Users/zachf/Documents/SFML-2.6.2/lib/libsfml-system-d.a
+build Jeu.exe: CXX_EXECUTABLE_LINKER__Jeu_Debug CMakeFiles/Jeu.dir/main.cpp.obj CMakeFiles/Jeu.dir/GameManager.cpp.obj CMakeFiles/Jeu.dir/Viewer.cpp.obj CMakeFiles/Jeu.dir/Entity.cpp.obj CMakeFiles/Jeu.dir/Player.cpp.obj CMakeFiles/Jeu.dir/Enemy.cpp.obj CMakeFiles/Jeu.dir/Wave.cpp.obj CMakeFiles/Jeu.dir/Shot.cpp.obj CMakeFiles/Jeu.dir/Collision.cpp.obj CMakeFiles/Jeu.dir/WaveFactory.cpp.obj CMakeFiles/Jeu.dir/Item.cpp.obj CMakeFiles/Jeu.dir/Bonus.cpp.obj | C$:/Users/zachf/Documents/SFML-2.6.2/lib/libsfml-main-d.a C$:/Users/zachf/Documents/SFML-2.6.2/lib/libsfml-graphics-d.a C$:/Users/zachf/Documents/SFML-2.6.2/lib/libsfml-window-d.a C$:/Users/zachf/Documents/SFML-2.6.2/lib/libsfml-system-d.a
   FLAGS = -g
   LINK_LIBRARIES = C:/Users/zachf/Documents/SFML-2.6.2/lib/libsfml-main-d.a  C:/Users/zachf/Documents/SFML-2.6.2/lib/libsfml-graphics-d.a  C:/Users/zachf/Documents/SFML-2.6.2/lib/libsfml-window-d.a  C:/Users/zachf/Documents/SFML-2.6.2/lib/libsfml-system-d.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\Jeu.dir

@@ -1,21 +1,27 @@
 #ifndef WAVE_HPP
 #define WAVE_HPP
 
+#include <memory>
 #include <vector>
 #include "Enemy.h"
 
 class Wave {
 public:
-    Wave(int enemyCount, std::string enemyTexturePath, double health, double attack, double defense, int speed, float sizeX, float sizeY);
-    void update(float deltaTime, Player& player);
-    void draw(sf::RenderWindow& window);
-    const std::vector<Enemy>& getEnemies() const; // Version constante
-    std::vector<Enemy>& getEnemies();
-
-    bool isCleared() const; // Vérifie si tous les ennemis sont éliminés.
+    Wave(int enemyCount, std::vector<std::unique_ptr<Enemy>> enemies);
+    void update(float deltaTime, const Player& player);
+    void draw(sf::RenderWindow& window) const;
+    std::vector<std::unique_ptr<Enemy>>& getEnemies();
+    [[nodiscard]] bool isCleared() const;
 
 private:
-    std::vector<Enemy> enemies;
+    std::vector<std::unique_ptr<Enemy>> enemies;
+    std::vector<std::unique_ptr<Enemy>> spawnedEnemiesList;
+    int enemiesToSpawn{};
+    int enemyCount;
+    int spawnedEnemies = 0;
+    float spawnTimer = 0.0f;
+    const float spawnInterval = 1.0f;
 };
+
 
 #endif // WAVE_HPP

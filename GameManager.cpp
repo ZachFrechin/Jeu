@@ -3,37 +3,72 @@
 #include <iostream>
 #include <stdexcept>
 
-// Constructeur
-GameManager::GameManager(sf::RenderWindow& window, std::string texturePath) : window(window) {
+GameManager::GameManager(sf::RenderWindow& window, const std::string &texturePath) : window(window) {
     if (!arena.loadFromFile(texturePath)) {
         throw std::runtime_error("Impossible de charger l'image du background !");
     }
-    sprite.setTexture(arena);
 
-    // Initialisation du joueur.
-    player = Player("assets/entity.png", 100, 10, 2, 500, 50.f, 50.f);
+    this->sprite.setTexture(arena);
 
-    // Ajout de plusieurs vagues.
-    waves.emplace_back(5, "assets/entity.png", 50, 5, 1, 200, 35.f, 35.f); // 1ère vague : 5 ennemis.
-    waves.emplace_back(10, "assets/entity.png", 70, 7, 2, 150, 40.f, 40.f); // 2ème vague : 10 ennemis.
-    waves.emplace_back(15, "assets/entity.png", 100, 10, 3, 100, 50.f, 50.f); // 3ème vague : 15 ennemis.
+    this->collisionManager = std::make_unique<Collision>(*this);
+    this->player = std::make_unique<Player>("assets/entity.png", 50, 15, 1.2, 250, 50.f, 50.f);
+    this->waveFactory = std::make_unique<WaveFactory>("assets/waves.json");
+
+    this->waves = waveFactory->generateWave(1);
 }
 
-// Mise à jour de la vague actuelle et des entités.
-void GameManager::update(float deltaTime) {
-    player.update(deltaTime, player);
+void GameManager::update(const float deltaTime, const float time) {
+    player->update(deltaTime, time, window);
+    for(auto it = inGameItems.begin(); it != inGameItems.end(); ++it) {
+        (*it)->update();
+    }
+
     if (currentWaveIndex < waves.size()) {
-        Wave& currentWave = waves[currentWaveIndex];
-        currentWave.update(deltaTime, player);
+        Wave& currentWave = *waves[currentWaveIndex];
+        collisionManager->attach(*player);
+        collisionManager->attach(currentWave);
+        collisionManager->handleCollision();
+
+        currentWave.update(deltaTime, *player);
+
+        if (currentWave.isCleared()) {
+            ++currentWaveIndex;
+            if (currentWaveIndex < waves.size()) {
+                std::cout << "Vague suivante : " << currentWaveIndex + 1 << std::endl;
+            } else {
+                std::cout << "Vous avez terminé toutes les vagues !" << std::endl;
+            }
+        }
     }
 }
 
-// Dessiner l'arène, le joueur et la vague actuelle.
-void GameManager::draw() {
+void GameManager::draw() const {
     window.draw(sprite);
-    window.draw(player.getSprite());
-
+    player->draw(window);
+    for(auto it = inGameItems.begin(); it != inGameItems.end(); ++it) {
+        (*it)->draw(window);
+    }
     if (currentWaveIndex < waves.size()) {
-        waves[currentWaveIndex].draw(window);
+        waves[currentWaveIndex]->draw(window);
     }
 }
+
+void GameManager::addInGameItem(std::vector<std::unique_ptr<Item>> items) {
+    for (auto it = items.begin(); it != items.end(); ++it) {
+        inGameItems.push_back(std::move(*it));
+    }
+}
+
+
+// TODO : getter -------------------------------------
+int GameManager::getCurrentWaveIndex() const {
+    return currentWaveIndex;
+}
+
+const Player& GameManager::getPlayer() const {
+    return *player;
+}
+
+
+
+

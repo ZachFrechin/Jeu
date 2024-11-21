@@ -1,0 +1,50 @@
+{
+  "waves": [
+    {
+      "enemies": [
+        {
+          "type": "goblin",
+          "texturePath": "assets/goblin.png",
+          "health": 50,
+          "attack": 10,
+          "defense": 5,
+          "speed": 20,
+          "sizeX": 100.0,
+          "sizeY": 100.0,
+          "count": 5,
+          "loot": [
+            {
+              "type": "bonus",
+              "texturePath": "assets/entity.png",
+              "sizeX": 20.0,
+              "sizeY": 20.0,
+              "stats": ["health"],
+              "dropRate": 0.9
+            }
+          ]
+        },
+        {
+          "type": "giant",
+          "texturePath": "assets/giant.png",
+          "health": 200,
+          "attack": 30,
+          "defense": 20,
+          "speed": 10,
+          "sizeX": 150.0,
+          "sizeY": 150.0,
+          "count": 4,
+          "loot": [
+            {
+              "type": "bonus",
+              "texturePath": "assets/entity.png",
+              "sizeX": 20.0,
+              "sizeY": 20.0,
+              "stats": ["attack"],
+              "dropRate": 0.9
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

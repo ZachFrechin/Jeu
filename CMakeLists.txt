@@ -23,6 +23,19 @@ add_executable(Jeu main.cpp
         Enemy.h
         Wave.cpp
         Wave.h
+        Shot.cpp
+        Shot.h
+        Shot.cpp
+        Shot.h
+        Collision.cpp
+        Collision.h
+        WaveFactory.cpp
+        WaveFactory.h
+        json.hpp
+        Item.cpp
+        Item.h
+        Bonus.cpp
+        Bonus.h
 )
 
 # Liez SFML à votre projet
