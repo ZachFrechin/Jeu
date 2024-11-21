@@ -5,20 +5,23 @@
 int main() {
     sf::VideoMode fullscreenMode = sf::VideoMode::getDesktopMode();
     sf::RenderWindow window(fullscreenMode, "Fullscreen Window", sf::Style::Fullscreen);
-    GameManager gameManager(window, "assets/arena.png");
-    Viewer viewer(window, gameManager);
+    std::unique_ptr<GameManager> gameManager = std::make_unique<GameManager>(window, "assets/arena.png");
+    Viewer viewer(window, *gameManager);
 
+    sf::Clock deltaClock;
     sf::Clock clock;
 
     while (window.isOpen()) {
+
+
         sf::Event event;
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed)
                 window.close();
         }
 
-        float deltaTime = clock.restart().asSeconds();
-        gameManager.update(deltaTime);
+        float deltaTime = deltaClock.restart().asSeconds();
+        gameManager->update(deltaTime, clock.getElapsedTime().asMilliseconds());
         viewer.render();
     }
 

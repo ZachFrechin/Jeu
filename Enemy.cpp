@@ -4,31 +4,46 @@
 #include <iostream>
 #include <math.h>
 
-Enemy::Enemy(): Entity() {
+Enemy::Enemy(): Entity() {}
+Enemy::Enemy(std::string texturePath, double health, double attack, double defense, int speed, float sizeX, float sizeY)
+    : Entity(texturePath, health, attack, defense, speed, sizeX, sizeY) {
 }
 
-void Enemy::update(float deltaTime, Player player) {
-    if (isColliding) {
-        velocity *= 0.7f; // Réduction progressive de la vitesse (friction)
-    } else {
-        // Calcul normal du mouvement vers le joueur
-        sf::Vector2f direction = player.getPosition() - position;
-        float length = std::sqrt(direction.x * direction.x + direction.y * direction.y);
+void Enemy::update(const float deltaTime, const Player& player) {
+    sf::Vector2f direction = player.getPosition() - position;
 
-        if (length != 0) {
+    if (const float length = std::sqrt(direction.x * direction.x + direction.y * direction.y); length != 0) {
             direction /= length; // Normalisation
             velocity += direction * static_cast<float>(speed) * deltaTime;
         }
-    }
 
-    // Limiter la vitesse maximale
-    const float maxSpeed = 200.f;
-    if (std::sqrt(velocity.x * velocity.x + velocity.y * velocity.y) > maxSpeed) {
+    if (constexpr float maxSpeed = 200.f; std::sqrt(velocity.x * velocity.x + velocity.y * velocity.y) > maxSpeed) {
         velocity /= std::sqrt(velocity.x * velocity.x + velocity.y * velocity.y);
         velocity *= maxSpeed;
     }
-
-    // Mise à jour de la position
     move(velocity.x * deltaTime, velocity.y * deltaTime);
 }
+
+void Enemy::shot(float deltaTime) {
+    std::cout << "shot" << std::endl;
+}
+
+void Enemy::addLoot(std::unique_ptr<Item> item) {
+    loot.push_back(std::move(item));
+}
+
+std::vector<std::unique_ptr<Item>> Enemy::drop() {
+    std::vector<std::unique_ptr<Item>> droppedItems;
+    std::cout << loot.size() << std::endl;
+    for(auto it = loot.begin(); it != loot.end(); ++it) {
+        std::cout << rand() % 101 << " : " << (*it)->getDropRate() * 100 << std::endl;
+        if(const float r = rand() % 101; r <= (*it)->getDropRate() * 100) {
+            (*it)->setDropped(true);
+            (*it)->setPosition(position);
+            droppedItems.push_back(std::move(*it));
+        }
+    }
+    return droppedItems;
+}
+
 
