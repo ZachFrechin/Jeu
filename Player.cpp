@@ -30,6 +30,8 @@ void Player::update(const float deltaTime, const float time, const sf::RenderWin
         sprite.setPosition(position);
     }
 
+    bound(window.getSize().x - 75, window.getSize().y - 75);
+
     for (const auto& shot : shots) {
         shot->update(deltaTime, window);
     }
@@ -37,6 +39,9 @@ void Player::update(const float deltaTime, const float time, const sf::RenderWin
     if (invincibilityTimer > 0.f) {
         invincibilityTimer -= deltaTime;
     }
+
+    debuffAttack(deltaTime);
+    debuffSpeed(deltaTime);
 }
 
 void Player::shot(const float time) {

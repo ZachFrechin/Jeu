@@ -1,0 +1,48 @@
+{
+  "enemies": [
+    {
+      "name": "goblin",
+      "texturePath": "assets/goblin.png",
+      "health": 50,
+      "attack": 15,
+      "defense": 5,
+      "speed": 200,
+      "sizeX": 100.0,
+      "sizeY": 100.0,
+      "loot": ["speed_boost"]
+    },
+    {
+      "name": "giant",
+      "texturePath": "assets/giant.png",
+      "health": 200,
+      "attack": 5,
+      "defense": 20,
+      "speed": 100,
+      "sizeX": 200.5,
+      "sizeY": 200.5,
+      "loot": ["instant_heal"]
+    },
+    {
+      "name": "orc",
+      "texturePath": "assets/orc.png",
+      "health": 200,
+      "attack": 18,
+      "defense": 20,
+      "speed": 175,
+      "sizeX": 140.5,
+      "sizeY": 140.5,
+      "loot": ["attack_boost"]
+    },
+    {
+      "name": "omicron",
+      "texturePath": "assets/omicron.png",
+      "health": 3000,
+      "attack": 20,
+      "defense": 20,
+      "speed": 35,
+      "sizeX": 400.5,
+      "sizeY": 400.5,
+      "loot": []
+    }
+  ]
+}

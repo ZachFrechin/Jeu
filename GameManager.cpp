@@ -11,10 +11,10 @@ GameManager::GameManager(sf::RenderWindow& window, const std::string &texturePat
     this->sprite.setTexture(arena);
 
     this->collisionManager = std::make_unique<Collision>(*this);
-    this->player = std::make_unique<Player>("assets/entity.png", 50, 15, 1.2, 250, 50.f, 50.f);
-    this->waveFactory = std::make_unique<WaveFactory>("assets/waves.json");
+    this->player = std::make_unique<Player>("assets/entity.png", 50, 15, 1.2, 250.0, 50.f, 50.f);
+    this->waveFactory = std::make_unique<WaveFactory>("assets/waves.json", "assets/enemies.json", "assets/bonus.json");
 
-    this->waves = waveFactory->generateWave(1);
+    this->waves = waveFactory->generateWave(2);
 }
 
 void GameManager::update(const float deltaTime, const float time) {
@@ -27,7 +27,7 @@ void GameManager::update(const float deltaTime, const float time) {
         Wave& currentWave = *waves[currentWaveIndex];
         collisionManager->attach(*player);
         collisionManager->attach(currentWave);
-        collisionManager->handleCollision();
+        collisionManager->handleCollision(deltaTime);
 
         currentWave.update(deltaTime, *player);
 
@@ -67,6 +67,10 @@ int GameManager::getCurrentWaveIndex() const {
 
 const Player& GameManager::getPlayer() const {
     return *player;
+}
+
+std::vector<std::unique_ptr<Item>>& GameManager::getInGameItems() {
+    return inGameItems;
 }
 
 

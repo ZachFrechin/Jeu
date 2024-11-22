@@ -36,24 +36,22 @@ void Collision::handlePlayerCollision(Enemy *enemy) const {
     }
 }
 
-void Collision::handleOtherEnemyCollision(Enemy *enemy, Enemy *otherEnemy) {
+void Collision::handleOtherEnemyCollision(Enemy *enemy, const Enemy *otherEnemy) {
     if (enemy->checkCollision((*otherEnemy))) {
-        enemy->applyForce(enemy->getPosition() - otherEnemy->getPosition(), 1.0f);
+        enemy->applyForce(enemy->getPosition() - otherEnemy->getPosition(), 0.5f);
     }
 }
 
 void Collision::handleEnemyShotCollision(Enemy *enemy, const Shot *shot, bool& imDeleted, bool& shotDeleted) {
     if(enemy->checkCollision(*shot)) {
-        std::cout << "collision par balle" << std::endl;
         shotDeleted = true;
         if(enemy->takeDamage(shot->getAttack())) {
-            std::cout << "damage par balle" << std::endl;
             imDeleted = true;
         }
     }
 }
 
-void Collision::handleCollision() const {
+void Collision::handleCollision(float time) const {
     auto& enemies = this->wave->getEnemies();
     for (auto enemy = enemies.begin(); enemy!= enemies.end();) {
         bool imDeleted = false;
@@ -83,6 +81,27 @@ void Collision::handleCollision() const {
              ++enemy;
         }
     }
+
+    auto& items = gameManager.getInGameItems();
+    for (auto item = items.begin(); item != items.end();) {
+        bool itemDeleted = false;
+        handleItemPlayerCollision(item->get(), time, itemDeleted);
+        if(itemDeleted) {
+            gameManager.getInGameItems().erase(item);
+        }else {
+            ++item;
+        }
+    }
 }
+
+
+
+void Collision::handleItemPlayerCollision(Item* item, float time, bool& itemDeleted) const {
+    if(item->checkCollision(*this->player)) {
+        item->loot(*player, time);
+        itemDeleted = true;
+    }
+}
+
 
 

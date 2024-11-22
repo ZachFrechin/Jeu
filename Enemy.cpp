@@ -14,10 +14,10 @@ void Enemy::update(const float deltaTime, const Player& player) {
 
     if (const float length = std::sqrt(direction.x * direction.x + direction.y * direction.y); length != 0) {
             direction /= length; // Normalisation
-            velocity += direction * static_cast<float>(speed) * deltaTime;
+            velocity += direction * static_cast<float>(speed * 1.5) * deltaTime;
         }
 
-    if (constexpr float maxSpeed = 200.f; std::sqrt(velocity.x * velocity.x + velocity.y * velocity.y) > maxSpeed) {
+    if ( float maxSpeed = speed; std::sqrt(velocity.x * velocity.x + velocity.y * velocity.y) > maxSpeed) {
         velocity /= std::sqrt(velocity.x * velocity.x + velocity.y * velocity.y);
         velocity *= maxSpeed;
     }
@@ -34,9 +34,7 @@ void Enemy::addLoot(std::unique_ptr<Item> item) {
 
 std::vector<std::unique_ptr<Item>> Enemy::drop() {
     std::vector<std::unique_ptr<Item>> droppedItems;
-    std::cout << loot.size() << std::endl;
     for(auto it = loot.begin(); it != loot.end(); ++it) {
-        std::cout << rand() % 101 << " : " << (*it)->getDropRate() * 100 << std::endl;
         if(const float r = rand() % 101; r <= (*it)->getDropRate() * 100) {
             (*it)->setDropped(true);
             (*it)->setPosition(position);

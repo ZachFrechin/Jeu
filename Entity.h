@@ -13,7 +13,7 @@ class Entity {
 public:
 
     Entity();
-    Entity(const std::string& texturePath, double health, double attack, double defense, int speed, float sizeX, float sizeY);
+    Entity(const std::string& texturePath, double health, double attack, double defense, double speed, float sizeX, float sizeY);
     virtual ~Entity() = default;
 
     virtual void move(float x, float y);
@@ -21,12 +21,17 @@ public:
     virtual void applyForce(sf::Vector2f force, float power);
     virtual void shot(float deltaTime) = 0;
     virtual void draw(sf::RenderWindow& window);
+    virtual void boostStat(double& stat, float& statTimer, double& statAmount, bool& statLogic, float boostTime, double amount);
+    virtual void deboostStat(double &stat, float &statTimer, double &statAmount, bool &statLogic, float deltaTime);
+    virtual void resetStat(double& stat, float& statTimer, double& statAmount, bool& statLogic);
+    void bound(float arenaWidth, float arenaHeight);
+    void addHealth(const double health);
 
     void setScale(float x, float y);
     void setPosition(sf::Vector2f position);
+    void setHealth(double health);
 
     sf::Vector2f getPosition() const;
-
     std::vector<std::unique_ptr<Shot>>& getShots();
     sf::Sprite getSprite() const;
     double getHealth() const;
@@ -35,6 +40,12 @@ public:
 
     bool checkCollision(const Entity& other) const;
     bool checkCollision(const Shot& other) const;
+
+    // Bonus function
+    void boostAttack(double amount, float boostTime);
+    void debuffAttack(float deltaTime);
+    void boostSpeed(double amount, float boostTime);
+    void debuffSpeed(float deltaTime);
 
 protected:
     std::string texturePath;
@@ -46,13 +57,23 @@ protected:
     sf::Vector2f velocity;
 
     double health;
+    double maxHealth;
     double attack;
     double defense;
-    int speed;
+    double speed;
 
     float timerShot;
     float lastBulletShot;
 
+    // ATTACK
+    float attackBoostTimer = 0.f;
+    double attackBoostAmount = 0.0;
+    bool attackBoost = false;
+
+    //SPEED
+    float speedBoostTimer = 0.f;
+    double speedBoostAmount = 0.0;
+    bool speedBoost = false;
 
 
 };

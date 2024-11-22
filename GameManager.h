@@ -19,6 +19,7 @@ public:
 
     int getCurrentWaveIndex() const;
     const Player& getPlayer() const;
+    std::vector<std::unique_ptr<Item>>& getInGameItems();
 
     void addInGameItem(std::vector<std::unique_ptr<Item>> items);
 

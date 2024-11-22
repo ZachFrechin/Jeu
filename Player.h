@@ -16,6 +16,8 @@ public:
 
     bool isInvincible() const;
 
+
+
 private:
     float invincibilityTimer = 0.f;
     const float maxInvincibilityTime = 1.f;

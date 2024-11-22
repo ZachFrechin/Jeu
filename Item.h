@@ -12,7 +12,7 @@ public:
     Item();
     Item(const std::string& texturePath, float sizeX, float sizeY, float dropRate);
 
-    virtual void loot(Player& player);
+    virtual void loot(Player &player, float time);
     void shot(float deltaTime) override;
     void update() const;
     void draw(sf::RenderWindow &window) override;

@@ -14,7 +14,7 @@ Wave::Wave(const int enemyCount, std::vector<std::unique_ptr<Enemy>> enemies) {
 
 void Wave::update(const float deltaTime, const Player& player) {
     spawnTimer += deltaTime;
-    if (spawnTimer >= 1.0f && enemiesToSpawn > 0) {
+    if (spawnTimer >= 3.0f && enemiesToSpawn > 0) {
         spawnTimer = 0.f;
         spawnedEnemiesList.push_back(std::move(enemies[enemyCount - enemiesToSpawn]));
         --enemiesToSpawn;

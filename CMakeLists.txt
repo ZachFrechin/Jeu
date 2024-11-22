@@ -36,6 +36,8 @@ add_executable(Jeu main.cpp
         Item.h
         Bonus.cpp
         Bonus.h
+        Entity.h
+        Entity.h
 )
 
 # Liez SFML à votre projet
