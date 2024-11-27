@@ -38,6 +38,17 @@ add_executable(Jeu main.cpp
         Bonus.h
         Entity.h
         Entity.h
+        Goblin.cpp
+        Goblin.h
+        Giant.cpp
+        Giant.h
+        EnemyFactory.h
+        orc.cpp
+        orc.h
+        Menu.cpp
+        Menu.h
+        MenuLevel.cpp
+        MenuLevel.h
 )
 
 # Liez SFML à votre projet

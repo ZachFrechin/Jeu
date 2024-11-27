@@ -5,15 +5,15 @@
 #include <math.h>
 
 Enemy::Enemy(): Entity() {}
-Enemy::Enemy(std::string texturePath, double health, double attack, double defense, int speed, float sizeX, float sizeY)
-    : Entity(texturePath, health, attack, defense, speed, sizeX, sizeY) {
+Enemy::Enemy(std::string texturePath, double health, double attack, double defense, int speed, float sizeX, float sizeY, int score)
+    : Entity(texturePath, health, attack, defense, speed, sizeX, sizeY, score) {
 }
 
-void Enemy::update(const float deltaTime, const Player& player) {
+void Enemy::update(const float deltaTime, const Player& player, sf::RenderWindow& window) {
     sf::Vector2f direction = player.getPosition() - position;
 
     if (const float length = std::sqrt(direction.x * direction.x + direction.y * direction.y); length != 0) {
-            direction /= length; // Normalisation
+            direction /= length;
             velocity += direction * static_cast<float>(speed * 1.5) * deltaTime;
         }
 

@@ -8,12 +8,12 @@
 #include "Entity.h"
 #include "Item.h"
 
-class Enemy final : public Entity {
+class Enemy : public Entity {
 public:
     Enemy();
-    Enemy(std::string texturePath, double health, double attack, double defense, int speed, float sizeX, float sizeY);
+    Enemy(std::string texturePath, double health, double attack, double defense, int speed, float sizeX, float sizeY, int score);
 
-    void update(float deltaTime, const Player& player);
+    virtual void update(float deltaTime, const Player& player, sf::RenderWindow& window);
     void shot(float deltaTime) override;
 
     void addLoot(std::unique_ptr<Item> item);

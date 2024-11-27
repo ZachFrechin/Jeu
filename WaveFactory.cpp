@@ -1,16 +1,12 @@
 #include "WaveFactory.h"
 #include <fstream>
+#include <iostream>
 #include <stdexcept>
 
-#include "Bonus.h"
+#include "EnemyFactory.h"
 
-// Constructeur : charge les données JSON depuis un fichier
-#include "WaveFactory.h"
-#include <fstream>
-#include <stdexcept>
-
-// Constructeur : charge les données des vagues et des ennemis
-WaveFactory::WaveFactory(const std::string& waveFilePath, const std::string& enemyFilePath, const std::string& bonusFilePath) {
+// Constructeur : charge les données des vagues, ennemis et bonus
+WaveFactory::WaveFactory(const std::string& waveFilePath, const std::string& enemyFilePath, const std::string& bonusFilePath, int difficulty) : difficulty(difficulty) {
     std::ifstream waveFile(waveFilePath);
     if (!waveFile.is_open()) {
         throw std::runtime_error("Impossible d'ouvrir le fichier waves.json");
@@ -30,46 +26,64 @@ WaveFactory::WaveFactory(const std::string& waveFilePath, const std::string& ene
     bonusFile >> bonusData;
 }
 
-
 // Méthode pour générer un nombre de vagues spécifié
-std::vector<std::unique_ptr<Wave>> WaveFactory::generateWave(int nb) {
+std::vector<std::unique_ptr<Wave>> WaveFactory::generateWave(const int nb) {
     std::vector<std::unique_ptr<Wave>> waves;
 
-    // Vérifier que le nombre demandé ne dépasse pas les vagues disponibles
     if (nb > waveData["waves"].size()) {
         throw std::out_of_range("Le nombre de vagues demandé dépasse les vagues disponibles dans le JSON");
     }
 
-    // Créer chaque vague
     waves.reserve(nb);
-    for (int i = 0; i < nb; ++i) {;
+    for (int i = 0; i < nb; ++i) {
         waves.push_back(createWave(waveData["waves"][i]));
     }
 
     return waves;
 }
 
-std::vector<std::unique_ptr<Enemy>> WaveFactory::createEnemies(const json& enemyData) const {
+// Trouve un ennemi par son nom dans enemyData
+json WaveFactory::findEnemy(const std::string& enemyName) const {
+    for (const auto& enemy : enemyData["enemies"]) {
+        if (enemy["name"] == enemyName) {
+            return enemy;
+        }
+    }
+    throw std::runtime_error("Ennemi non trouvé : " + enemyName);
+}
+
+// Crée un bonus à partir de bonusData
+std::unique_ptr<Item> WaveFactory::createLoot(const std::string& bonusName) const {
+    for (const auto& bonusInfo : bonusData["bonuses"]) {
+        if (bonusInfo["name"] == bonusName) {
+            return std::make_unique<Bonus>(
+                bonusInfo["texturePath"],
+                bonusInfo["sizeX"],
+                bonusInfo["sizeY"],
+                bonusInfo["stats"],
+                bonusInfo["dropRate"],
+                bonusInfo["amount"],
+                bonusInfo["boostTime"]
+            );
+        }
+    }
+    throw std::runtime_error("Bonus non trouvé : " + bonusName);
+}
+
+// Crée une liste d'ennemis
+std::vector<std::unique_ptr<Enemy>> WaveFactory::createEnemies(const json& enemiesInfo) const {
     std::vector<std::unique_ptr<Enemy>> enemies;
 
-    for (const auto& enemyInfo : enemyData) {
-        // Trouver les détails de l'ennemi par son nom
-        auto enemyDetails = findEnemy(enemyInfo["name"]);
-
+    for (const auto& enemyInfo : enemiesInfo) {
         const int count = enemyInfo["count"];
+        const std::string& enemyName = enemyInfo["name"];
+
         for (int i = 0; i < count; ++i) {
-            // Créer l'ennemi
-            auto enemy = std::make_unique<Enemy>(
-                enemyDetails["texturePath"],
-                enemyDetails["health"],
-                enemyDetails["attack"],
-                enemyDetails["defense"],
-                enemyDetails["speed"],
-                enemyDetails["sizeX"],
-                enemyDetails["sizeY"]
-            );
+            // Utiliser EnemyFactory pour créer l'ennemi
+            auto enemy = EnemyFactory::createEnemy(enemyName, difficulty);
 
             // Ajouter les loots à l'ennemi
+            json enemyDetails = findEnemy(enemyName);
             if (enemyDetails.contains("loot")) {
                 for (const auto& lootName : enemyDetails["loot"]) {
                     auto loot = createLoot(lootName);
@@ -80,49 +94,15 @@ std::vector<std::unique_ptr<Enemy>> WaveFactory::createEnemies(const json& enemy
             enemies.push_back(std::move(enemy));
         }
     }
+
     return enemies;
 }
 
-json WaveFactory::findEnemy(const std::string& enemyName) const {
-    for (const auto& enemy : enemyData["enemies"]) {
-        if (enemy["name"] == enemyName) {
-            return enemy;
-        }
-    }
-    throw std::runtime_error("Ennemi non trouvé : " + enemyName);
-}
-
-
-
-
-
-// Méthode pour créer une vague à partir des données JSON
+// Crée une vague à partir des données JSON
 std::unique_ptr<Wave> WaveFactory::createWave(const json& waveJson) {
-    const auto& enemyData = waveJson["enemies"];
-    auto enemies = createEnemies(enemyData);
+    const auto& enemiesInfo = waveJson["enemies"];
+    auto enemies = createEnemies(enemiesInfo);
     int enemyCount = static_cast<int>(enemies.size());
 
-    // Créer une vague avec le nombre d'ennemis et la liste d'ennemis
-    return std::make_unique<Wave>(enemyCount, std::move(enemies));
-}
-
-std::unique_ptr<Item> WaveFactory::createLoot(const std::string& bonusName) const {
-    // Trouver le bonus correspondant dans bonusData
-    for (const auto& bonusInfo : bonusData["bonuses"]) {
-        if (bonusInfo["name"] == bonusName) {
-            // Créer un Bonus à partir des informations
-            return std::make_unique<Bonus>(
-                bonusInfo["texturePath"],
-                bonusInfo["sizeX"],
-                bonusInfo["sizeY"],
-                bonusInfo["stats"].get<std::vector<std::string>>(),
-                bonusInfo["dropRate"],
-                bonusInfo["amount"],
-                bonusInfo["boostTime"]
-            );
-        }
-    }
-
-    // Si le bonus n'est pas trouvé
-    throw std::runtime_error("Bonus non trouvé : " + bonusName);
+    return std::make_unique<Wave>(enemyCount, std::move(enemies), difficulty);
 }

@@ -4,16 +4,17 @@
 #include <cmath>
 #include "Player.h"
 
-Entity::Entity() : Entity("assets/default.png", 0, 0, 0, 0, 0.f, 0.f){}
-Entity::Entity(const std::string& texturePath, double health, double attack, double defense, double speed, float sizeX, float sizeY):
-texturePath(texturePath), health(health), attack(attack), defense(defense), speed(speed), maxHealth(health) {
+Entity::Entity() : Entity("assets/default.png", 0, 0, 0, 0, 0.f, 0.f, 0){}
+Entity::Entity(const std::string& texturePath, double health, double attack, double defense, double speed, float sizeX, float sizeY, int score):
+texturePath(texturePath), health(health), attack(attack), defense(defense), speed(speed), maxHealth(health), score(score) {
     if (!texture.loadFromFile(texturePath)) {
         std::cout << "Failed to load texture: " << texturePath << std::endl;
     }
         sprite.setTexture(texture);
         sprite.setColor(sf::Color(255, 255, 255, 255));
+        sprite.setOrigin(sprite.getLocalBounds().width / 2.f, sprite.getLocalBounds().height / 2.f);
         lastBulletShot = 0.f;
-        timerShot = 1000.f;
+        timerShot = 1000.0;
         setScale(sizeX, sizeY);
         setPosition(sf::Vector2f(static_cast<float>(rand() % 1700), static_cast<float>(rand() % 1000)));
 }
@@ -118,6 +119,11 @@ void Entity::bound(const float arenaWidth, const float arenaHeight) {
 
 
 // TODO : getter ----------------------------------------------------
+
+int Entity::getScore() const {
+    return score;
+}
+
 sf::Sprite Entity::getSprite() const {
     return sprite;
 }
@@ -144,6 +150,10 @@ double Entity::getDefense() const {
 
 
 // TODO : setter ----------------------------------------------------
+void Entity::addScore(const int score) {
+    this->score += score;
+}
+
 void Entity::setScale(const float x, const float y) {
     const sf::Vector2u textureSize = texture.getSize();
     sprite.setScale(x / textureSize.x, y / textureSize.y);
@@ -181,6 +191,14 @@ void Entity::boostSpeed(const double amount, const float boostTime) {
 
 void Entity::debuffSpeed(const float deltaTime) {
     deboostStat(speed, speedBoostTimer, speedBoostAmount, speedBoost, deltaTime);
+}
+
+void Entity::boostAttackSpeed(const double amount, const float boostTime) {
+    boostStat(timerShot, attackSpeedTimer, attackSpeedAmount, attackSpeedBoost, boostTime, amount);
+}
+
+void Entity::debuffAttackSpeed(const float deltaTime) {
+    deboostStat(timerShot, attackSpeedTimer, attackSpeedAmount, attackSpeedBoost, deltaTime);
 }
 
 

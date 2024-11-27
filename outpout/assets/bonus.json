@@ -6,7 +6,7 @@
       "sizeX": 20.5,
       "sizeY": 20.5,
       "stats": ["health"],
-      "dropRate": 0.3,
+      "dropRate": 0.1,
       "amount": 50.0,
       "boostTime" : 5.0
     },
@@ -16,7 +16,7 @@
       "sizeX": 20.5,
       "sizeY": 20.5,
       "stats": ["attack"],
-      "dropRate": 0.3,
+      "dropRate": 0.1,
       "amount": 30.0,
       "boostTime": 5.0
     },
@@ -26,9 +26,19 @@
       "sizeX": 20.5,
       "sizeY": 20.5,
       "stats": ["speed"],
-      "dropRate": 0.4,
+      "dropRate": 0.1,
       "amount": 150.0,
       "boostTime": 3.0
+    },
+    {
+      "name": "attack_speed_boost",
+      "texturePath": "assets/attack_speed.png",
+      "sizeX": 20.5,
+      "sizeY": 20.5,
+      "stats": ["attack_speed"],
+      "dropRate": 0.1,
+      "amount": -900.0,
+      "boostTime": 10.0
     }
   ]
 }

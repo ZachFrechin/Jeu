@@ -35,6 +35,7 @@ private:
     std::vector<std::unique_ptr<Item>> inGameItems;
 
     int currentWaveIndex = 0;
+    int difficulty = 2;
 };
 
 #endif

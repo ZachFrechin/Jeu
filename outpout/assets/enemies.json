@@ -9,7 +9,7 @@
       "speed": 200,
       "sizeX": 100.0,
       "sizeY": 100.0,
-      "loot": ["speed_boost"]
+      "loot": ["attack_speed_boost", "instant_heal"]
     },
     {
       "name": "giant",
@@ -31,7 +31,7 @@
       "speed": 175,
       "sizeX": 140.5,
       "sizeY": 140.5,
-      "loot": ["attack_boost"]
+      "loot": ["speed_boost"]
     },
     {
       "name": "omicron",

@@ -32,7 +32,7 @@ void Collision::detachWave() {
 void Collision::handlePlayerCollision(Enemy *enemy) const {
     if (enemy->checkCollision(*this->player)) {
         this->player->takeDamage(enemy->getAttack());
-        enemy->applyForce(enemy->getPosition() - this->player->getPosition(), 20.0f);
+        enemy->applyForce(enemy->getPosition() - this->player->getPosition(), 1.f);
     }
 }
 
@@ -76,6 +76,7 @@ void Collision::handleCollision(float time) const {
         }
          if(imDeleted) {
              gameManager.addInGameItem((*enemy)->drop());
+             player->addScore((*enemy)->getScore());
              enemy = this->wave->getEnemies().erase(enemy);
          }else {
              ++enemy;
@@ -96,7 +97,7 @@ void Collision::handleCollision(float time) const {
 
 
 
-void Collision::handleItemPlayerCollision(Item* item, float time, bool& itemDeleted) const {
+void Collision::handleItemPlayerCollision(Item* item, const float time, bool& itemDeleted) const {
     if(item->checkCollision(*this->player)) {
         item->loot(*player, time);
         itemDeleted = true;

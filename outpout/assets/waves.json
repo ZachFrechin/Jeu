@@ -2,14 +2,62 @@
   "waves": [
     {
       "enemies": [
-        { "name": "goblin", "count": 6 },
-        { "name": "giant", "count": 4 },
-        { "name":  "orc", "count" : 2}
+        {"name": "goblin", "count": 5},
+        {"name": "giant", "count": 3}
       ]
     },
     {
       "enemies": [
-        { "name": "omicron", "count": 1 }
+        {"name": "orc", "count": 2},
+        {"name": "giant", "count": 2}
+      ]
+    },
+    {
+      "enemies": [
+        {"name": "goblin", "count": 10},
+        {"name": "giant", "count": 4}
+      ]
+    },
+    {
+      "enemies": [
+        {"name": "goblin", "count": 20},
+        {"name": "orc", "count": 2}
+      ]
+    },
+    {
+      "enemies": [
+        {"name": "goblin", "count": 30},
+        {"name": "giant", "count": 5}
+      ]
+    },
+    {
+      "enemies": [
+        {"name": "orc", "count": 5},
+        {"name": "giant", "count": 7}
+      ]
+    },
+    {
+      "enemies": [
+        {"name": "goblin", "count": 40},
+        {"name": "giant", "count": 8}
+      ]
+    },
+    {
+      "enemies": [
+        {"name": "goblin", "count": 45},
+        {"name": "giant", "count": 9}
+      ]
+    },
+    {
+      "enemies": [
+        {"name": "orc", "count": 7},
+        {"name": "giant", "count": 10}
+      ]
+    },
+    {
+      "enemies": [
+        {"name": "goblin", "count": 55},
+        {"name": "giant", "count": 12}
       ]
     }
   ]

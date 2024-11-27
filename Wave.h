@@ -7,8 +7,8 @@
 
 class Wave {
 public:
-    Wave(int enemyCount, std::vector<std::unique_ptr<Enemy>> enemies);
-    void update(float deltaTime, const Player& player);
+    Wave(int enemyCount, std::vector<std::unique_ptr<Enemy>> enemies, int difficulty);
+    void update(float deltaTime, const Player& player, sf::RenderWindow& window);
     void draw(sf::RenderWindow& window) const;
     std::vector<std::unique_ptr<Enemy>>& getEnemies();
     [[nodiscard]] bool isCleared() const;
@@ -21,6 +21,7 @@ private:
     int spawnedEnemies = 0;
     float spawnTimer = 0.0f;
     const float spawnInterval = 1.0f;
+    int difficulty = 0;
 };
 
 

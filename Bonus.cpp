@@ -13,6 +13,7 @@ Bonus::Bonus(const std::string& texturePath, const float sizeX, const float size
 void Bonus::loot(Player& player, const float time)
 {
     std::map<std::string, int> map = getStatsMap();
+    std::cout << "Bonus::loot" << std::endl;
     for(const auto stat : stats) {
         switch(map[stat]) {
             case 1:
@@ -22,6 +23,9 @@ void Bonus::loot(Player& player, const float time)
                 break;
             case 201 :
                 player.boostSpeed(amount, boostTime);
+                break;
+            case 202:
+                player.boostAttackSpeed(amount, boostTime);
             default:
                 std::cout << "Error in stats bonus check";
         }
@@ -34,5 +38,6 @@ std::map<std::string, int> Bonus::getStatsMap() {
     map["attack"] = 101;
     map["health"] = 1;
     map["speed"] = 201;
+    map["attack_speed"] = 202;
     return map;
 } ;

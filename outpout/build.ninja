@@ -133,6 +133,41 @@ build CMakeFiles/Jeu.dir/Bonus.cpp.obj: CXX_COMPILER__Jeu_unscanned_Debug C$:/Us
   OBJECT_DIR = CMakeFiles\Jeu.dir
   OBJECT_FILE_DIR = CMakeFiles\Jeu.dir
 
+build CMakeFiles/Jeu.dir/Goblin.cpp.obj: CXX_COMPILER__Jeu_unscanned_Debug C$:/Users/zachf/CLionProjects/Jeu/Goblin.cpp || cmake_object_order_depends_target_Jeu
+  DEP_FILE = CMakeFiles\Jeu.dir\Goblin.cpp.obj.d
+  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
+  INCLUDES = -isystem C:/Users/zachf/Documents/SFML-2.6.2/include
+  OBJECT_DIR = CMakeFiles\Jeu.dir
+  OBJECT_FILE_DIR = CMakeFiles\Jeu.dir
+
+build CMakeFiles/Jeu.dir/Giant.cpp.obj: CXX_COMPILER__Jeu_unscanned_Debug C$:/Users/zachf/CLionProjects/Jeu/Giant.cpp || cmake_object_order_depends_target_Jeu
+  DEP_FILE = CMakeFiles\Jeu.dir\Giant.cpp.obj.d
+  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
+  INCLUDES = -isystem C:/Users/zachf/Documents/SFML-2.6.2/include
+  OBJECT_DIR = CMakeFiles\Jeu.dir
+  OBJECT_FILE_DIR = CMakeFiles\Jeu.dir
+
+build CMakeFiles/Jeu.dir/orc.cpp.obj: CXX_COMPILER__Jeu_unscanned_Debug C$:/Users/zachf/CLionProjects/Jeu/orc.cpp || cmake_object_order_depends_target_Jeu
+  DEP_FILE = CMakeFiles\Jeu.dir\orc.cpp.obj.d
+  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
+  INCLUDES = -isystem C:/Users/zachf/Documents/SFML-2.6.2/include
+  OBJECT_DIR = CMakeFiles\Jeu.dir
+  OBJECT_FILE_DIR = CMakeFiles\Jeu.dir
+
+build CMakeFiles/Jeu.dir/Menu.cpp.obj: CXX_COMPILER__Jeu_unscanned_Debug C$:/Users/zachf/CLionProjects/Jeu/Menu.cpp || cmake_object_order_depends_target_Jeu
+  DEP_FILE = CMakeFiles\Jeu.dir\Menu.cpp.obj.d
+  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
+  INCLUDES = -isystem C:/Users/zachf/Documents/SFML-2.6.2/include
+  OBJECT_DIR = CMakeFiles\Jeu.dir
+  OBJECT_FILE_DIR = CMakeFiles\Jeu.dir
+
+build CMakeFiles/Jeu.dir/MenuLevel.cpp.obj: CXX_COMPILER__Jeu_unscanned_Debug C$:/Users/zachf/CLionProjects/Jeu/MenuLevel.cpp || cmake_object_order_depends_target_Jeu
+  DEP_FILE = CMakeFiles\Jeu.dir\MenuLevel.cpp.obj.d
+  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
+  INCLUDES = -isystem C:/Users/zachf/Documents/SFML-2.6.2/include
+  OBJECT_DIR = CMakeFiles\Jeu.dir
+  OBJECT_FILE_DIR = CMakeFiles\Jeu.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target Jeu
@@ -141,7 +176,7 @@ build CMakeFiles/Jeu.dir/Bonus.cpp.obj: CXX_COMPILER__Jeu_unscanned_Debug C$:/Us
 #############################################
 # Link the executable Jeu.exe
 
-build Jeu.exe: CXX_EXECUTABLE_LINKER__Jeu_Debug CMakeFiles/Jeu.dir/main.cpp.obj CMakeFiles/Jeu.dir/GameManager.cpp.obj CMakeFiles/Jeu.dir/Viewer.cpp.obj CMakeFiles/Jeu.dir/Entity.cpp.obj CMakeFiles/Jeu.dir/Player.cpp.obj CMakeFiles/Jeu.dir/Enemy.cpp.obj CMakeFiles/Jeu.dir/Wave.cpp.obj CMakeFiles/Jeu.dir/Shot.cpp.obj CMakeFiles/Jeu.dir/Collision.cpp.obj CMakeFiles/Jeu.dir/WaveFactory.cpp.obj CMakeFiles/Jeu.dir/Item.cpp.obj CMakeFiles/Jeu.dir/Bonus.cpp.obj | C$:/Users/zachf/Documents/SFML-2.6.2/lib/libsfml-main-d.a C$:/Users/zachf/Documents/SFML-2.6.2/lib/libsfml-graphics-d.a C$:/Users/zachf/Documents/SFML-2.6.2/lib/libsfml-window-d.a C$:/Users/zachf/Documents/SFML-2.6.2/lib/libsfml-system-d.a
+build Jeu.exe: CXX_EXECUTABLE_LINKER__Jeu_Debug CMakeFiles/Jeu.dir/main.cpp.obj CMakeFiles/Jeu.dir/GameManager.cpp.obj CMakeFiles/Jeu.dir/Viewer.cpp.obj CMakeFiles/Jeu.dir/Entity.cpp.obj CMakeFiles/Jeu.dir/Player.cpp.obj CMakeFiles/Jeu.dir/Enemy.cpp.obj CMakeFiles/Jeu.dir/Wave.cpp.obj CMakeFiles/Jeu.dir/Shot.cpp.obj CMakeFiles/Jeu.dir/Collision.cpp.obj CMakeFiles/Jeu.dir/WaveFactory.cpp.obj CMakeFiles/Jeu.dir/Item.cpp.obj CMakeFiles/Jeu.dir/Bonus.cpp.obj CMakeFiles/Jeu.dir/Goblin.cpp.obj CMakeFiles/Jeu.dir/Giant.cpp.obj CMakeFiles/Jeu.dir/orc.cpp.obj CMakeFiles/Jeu.dir/Menu.cpp.obj CMakeFiles/Jeu.dir/MenuLevel.cpp.obj | C$:/Users/zachf/Documents/SFML-2.6.2/lib/libsfml-main-d.a C$:/Users/zachf/Documents/SFML-2.6.2/lib/libsfml-graphics-d.a C$:/Users/zachf/Documents/SFML-2.6.2/lib/libsfml-window-d.a C$:/Users/zachf/Documents/SFML-2.6.2/lib/libsfml-system-d.a
   FLAGS = -g
   LINK_LIBRARIES = C:/Users/zachf/Documents/SFML-2.6.2/lib/libsfml-main-d.a  C:/Users/zachf/Documents/SFML-2.6.2/lib/libsfml-graphics-d.a  C:/Users/zachf/Documents/SFML-2.6.2/lib/libsfml-window-d.a  C:/Users/zachf/Documents/SFML-2.6.2/lib/libsfml-system-d.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\Jeu.dir

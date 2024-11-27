@@ -7,7 +7,7 @@
 #include <iostream>
 
 Item::Item(): TTL(0), dropRate(0.f) {}
-Item::Item(const std::string& texturePath, float sizeX, float sizeY, float dropRate) : Entity(texturePath,0,0,0,0, sizeX, sizeY),
+Item::Item(const std::string& texturePath, float sizeX, float sizeY, float dropRate) : Entity(texturePath,0,0,0,0, sizeX, sizeY, 0),
     TTL(0), dropRate(dropRate) {}
 
 void Item::loot(Player& player, float time) {

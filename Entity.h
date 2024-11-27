@@ -13,7 +13,7 @@ class Entity {
 public:
 
     Entity();
-    Entity(const std::string& texturePath, double health, double attack, double defense, double speed, float sizeX, float sizeY);
+    Entity(const std::string& texturePath, double health, double attack, double defense, double speed, float sizeX, float sizeY, int score);
     virtual ~Entity() = default;
 
     virtual void move(float x, float y);
@@ -25,6 +25,9 @@ public:
     virtual void deboostStat(double &stat, float &statTimer, double &statAmount, bool &statLogic, float deltaTime);
     virtual void resetStat(double& stat, float& statTimer, double& statAmount, bool& statLogic);
     void bound(float arenaWidth, float arenaHeight);
+
+    int getScore() const;
+
     void addHealth(const double health);
 
     void setScale(float x, float y);
@@ -38,6 +41,8 @@ public:
     double getAttack() const;
     double getDefense() const;
 
+    void addScore(int score);
+
     bool checkCollision(const Entity& other) const;
     bool checkCollision(const Shot& other) const;
 
@@ -46,6 +51,8 @@ public:
     void debuffAttack(float deltaTime);
     void boostSpeed(double amount, float boostTime);
     void debuffSpeed(float deltaTime);
+    void boostAttackSpeed(double amount, float boostTime);
+    void debuffAttackSpeed(float deltaTime);
 
 protected:
     std::string texturePath;
@@ -61,9 +68,13 @@ protected:
     double attack;
     double defense;
     double speed;
+    double score;
 
-    float timerShot;
+    double timerShot;
     float lastBulletShot;
+    float attackSpeedTimer = 0.f;
+    double attackSpeedAmount = 0.0;
+    bool attackSpeedBoost = false;
 
     // ATTACK
     float attackBoostTimer = 0.f;

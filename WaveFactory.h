@@ -16,7 +16,7 @@ using json = nlohmann::json;
 class WaveFactory {
 public:
 
-    WaveFactory(const std::string& waveFilePath, const std::string& enemyFilePath, const std::string& bonusFilePath);
+    WaveFactory(const std::string& waveFilePath, const std::string& enemyFilePath, const std::string& bonusFilePath, int difficulty);
 
     std::vector<std::unique_ptr<Wave>> generateWave(int nb);
 
@@ -29,6 +29,8 @@ private:
     std::vector<std::unique_ptr<Enemy>> createEnemies(const json& enemyData) const;
     std::unique_ptr<Item> createLoot(const std::string& bonusName) const;
     std::unique_ptr<Wave> createWave(const json& waveJson);
+
+    int difficulty = 0;
 };
 
 #endif
